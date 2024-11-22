@@ -11,16 +11,29 @@ client = AzureOpenAI(
     api_key=api_key
 )
 
-content1 = "営業の担当の課題について教えてください。\n"
+content1 =""
+# content1 = "営業の担当の課題について教えてください。\n"
 # content1 = "営業の担当の課題について要約して教えてください。\n"
 
 # content1 = "営業の担当の満足度が高い理由を教えてください。\n"
 
-content2 = "以下のマークダウン形式のアンケート結果をもとに回答してください。\n\n"
+# content2 = "以下のマークダウン形式のアンケート結果をもとに回答してください。\n\n"
+content2 = "以下のマークダウン形式のアンケート結果を要約して出力してください。\n\n"
 content = content1 + content2
 
-# path = "./【正式運用版】お客様満足度アンケ.csv"
-path = "./【正式運用版】お客様満足度アンケ (1) 1.csv"
+# content += "# アンケート結果"
+# content += "\n"
+# content += "## 営業担当の対応（挨拶、マナー、迅速性、丁寧さ等）はいかがでしたでしょうか。"
+# content += "\n"
+# content += "<INSERT>"
+# content += "\n"
+# content += "## 営業担当についてそのように評価された理由をお聞かせください。 "
+# content += "\n"
+# content += "<INSERT>"
+# content += "\n"
+
+path = "./【正式運用版】お客様満足度アンケ.csv"
+# path = "./【正式運用版】お客様満足度アンケ (1) 1.csv"
 
 # with open(path, encoding="utf-16 LE") as f:
 #     l = f.readlines()
@@ -31,6 +44,7 @@ with open(path, encoding="utf-16 LE") as f:
     l = csv.reader(f, delimiter="\t")
     for index_row, row in enumerate(l):
         if (index_row < 3) : continue
+        elif (index_row > 100) : break
         
         content += "# アンケート結果"
         content += "\n"
@@ -42,62 +56,46 @@ with open(path, encoding="utf-16 LE") as f:
         content += "\n"
         content += row[22]
         content += "\n"
-        content += "## 弊社の技術力について回答お願い致します。"
-        content += "\n"
-        content += "### プロジェクトマネージャーの対応"
-        content += "\n"
-        content += row[23]
-        content += "\n"
-        content += "### 技術力・経験"
-        content += "\n"
-        content += row[24]
-        content += "\n"
-        content += "### 工程管理の対応"
-        content += "\n"
-        content += row[25]
-        content += "\n"
-        content += "### 現場でのコミュニケーション"
-        content += "\n"
-        content += row[26]
-        content += "\n"
-        content += "### 安全対策の対応"
-        content += "\n"
-        content += row[27]
-        content += "\n"
-        content += "### ベンダーの管理対応"
-        content += "\n"
-        content += row[28]
-        content += "\n"
-        content += "### 追加変更への対応"
-        content += "\n"
-        content += row[29]
-        content += "\n"
-        content += "### 成果物の品質"
-        content += "\n"
-        content += row[30]
-        content += "\n"        
-        content += "## 技術力について、そのように評価された理由をお聞かせください。 "
-        content += "\n"
-        content += row[31]
-        content += "\n"
-        # content += "## 弊社からの報告について回答お願い致します"
-        # content += row[30]
+        # content += "## 弊社の技術力について回答お願い致します。"
+        # content += "\n"
+        # content += "### プロジェクトマネージャーの対応"
+        # content += "\n"
+        # content += row[23]
+        # content += "\n"
+        # content += "### 技術力・経験"
+        # content += "\n"
+        # content += row[24]
+        # content += "\n"
+        # content += "### 工程管理の対応"
+        # content += "\n"
+        # content += row[25]
+        # content += "\n"
+        # content += "### 現場でのコミュニケーション"
+        # content += "\n"
+        # content += row[26]
+        # content += "\n"
+        # content += "### 安全対策の対応"
+        # content += "\n"
+        # content += row[27]
+        # content += "\n"
+        # content += "### ベンダーの管理対応"
+        # content += "\n"
+        # content += row[28]
+        # content += "\n"
         # content += "### 追加変更への対応"
-        # content += row[31]        content += "### "
-        # content += row[33]
+        # content += "\n"
+        # content += row[29]
+        # content += "\n"
+        # content += "### 成果物の品質"
+        # content += "\n"
+        # content += row[30]
+        # content += "\n"        
+        # content += "## 技術力について、そのように評価された理由をお聞かせください。 "
+        # content += "\n"
+        # content += row[31]
+        # content += "\n"
 
-        # for index_item, item in enumerate(row):
-        #     if (index_item < 21) : continue
-        #     content = content + item + ","
-        #     print("item: " + item)
-        # content = content + "\n"
-
-        
-        # with open("./abc.csv", mode="w", encoding="utf-16 LE") as w:
-        #     writer = csv.writer(w)
-        #     writer.writerow(row)
-
-# print(content)
+print(content)
 
 # Chat Completionメソッドで問い合わせをします。
 completion = client.chat.completions.create(
