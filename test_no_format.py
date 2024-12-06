@@ -17,12 +17,6 @@ content2 = "以下のマークダウン形式のアンケート結果をもと�
 content = content1 + content2
 
 path = "./【正式運用版】お客様満足度アンケ.csv"
-# path = "./【正式運用版】お客様満足度アンケ (1) 1.csv"
-
-# with open(path, encoding="utf-16 LE") as f:
-#     l = f.readlines()
-#     for row in l:
-#         print(row)
 
 with open(path, encoding="utf-16 LE") as f:
     l = csv.reader(f, delimiter="\t")
@@ -38,11 +32,6 @@ with open(path, encoding="utf-16 LE") as f:
             print("item: " + item)
 
         content = content + "\n"
-
-        
-        # with open("./abc.csv", mode="w", encoding="utf-16 LE") as w:
-        #     writer = csv.writer(w)
-        #     writer.writerow(row)
 
 print("contet:\n" + content)
 
