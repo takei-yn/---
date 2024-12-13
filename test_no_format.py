@@ -11,7 +11,7 @@ client = AzureOpenAI(
     api_key=api_key
 )
 
-content1 = "USER No. 88850555の方が総合力についてなんと答えていたか教えてください\n"
+content1 = "USER No. 88843270の方がについて今後の投資計画と答えていたか教えてください\n"
 
 content2 = "以下のマークダウン形式のアンケート結果をもとに回答してください。\n\n"
 content = content1 + content2
@@ -29,7 +29,6 @@ with open(path, encoding="utf-16 LE") as f:
             # if (index_item < 21) : continue
 
             content = content + item + ","
-            print("item: " + item)
 
         content = content + "\n"
 
