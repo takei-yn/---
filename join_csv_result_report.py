@@ -20,14 +20,18 @@ bs_list = pd.concat([bs_list_2022, bs_list_2023], axis=0, ignore_index=True)
 # print("bs_list_2022")
 # print(bs_list_2022.columns)
 
-join_review = pd.merge(customer_review, bs_list, how="outer", on = "物件ID")
+# 物件IDをキーにして左結合
+join_review = pd.merge(customer_review, bs_list, how="left", on = "物件ID")
 
+# 欠損値を空文字列で埋める
+result = join_review.fillna(" ")
 
-join_review.to_csv('join_review_result_report.csv',encoding='utf-8')
+# join_review.to_csv('join_review_result_report.csv',encoding='utf-8')
+result.to_csv('join_review_result_report.csv',encoding='utf-8')
 
+print(result.head())
 
 a = pd.read_csv("join_review_result_report.csv", encoding="utf-8",  dtype=str)
 
 print(a.columns)
 print(a.head())
-# print(a["Unnamed: 0"])
